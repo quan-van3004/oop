@@ -5,17 +5,17 @@ namespace ATMManagement
 {
     public delegate void TransactionEventHandler(string message);
 
-    // Lớp Account đại diện cho tài khoản ngân hàng
+
     public class Account
     {
         public string AccountHolderName { get; private set; }
         public string PhoneNumber { get; private set; }
         public decimal Balance { get; private set; }
 
-        // Danh sách lưu lịch sử giao dịch
+
         public List<string> TransactionHistory { get; private set; }
 
-        // Sự kiện khi có giao dịch
+
         public event TransactionEventHandler OnTransaction;
 
         public Account(string accountHolderName, string phoneNumber, decimal initialBalance)
@@ -97,10 +97,10 @@ namespace ATMManagement
     {
         static void Main(string[] args)
         {
-            // Đặt mã hóa cho Console để hiển thị tiếng Việt
+
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            // Tạo hai tài khoản mẫu
+
             Account account1 = new Account("nguyen quan", "09042005", 5000000);
             Account account2 = new Account("huy vu", "09041234", 5000000);
             Account account3 = new Account("trong nguyen", "09045678", 5000000);
@@ -109,11 +109,11 @@ namespace ATMManagement
 
             ATM atm = new ATM();
 
-            // Đăng ký sự kiện gửi tin nhắn
+
             account1.OnTransaction += atm.SendSMS;
             account2.OnTransaction += atm.SendSMS;
 
-            // Đăng nhập vào tài khoản
+
             Account loggedInAccount = null;
 
             while (loggedInAccount == null)
@@ -140,16 +140,16 @@ namespace ATMManagement
                 }
             }
 
-            // Bắt đầu vòng lặp cho các lựa chọn
+
             string userChoice;
             do
             {
-                // Cho phép người dùng chọn loại giao dịch
+
                 Console.WriteLine("Chọn giao dịch:");
                 Console.WriteLine("1. Rút tiền");
                 Console.WriteLine("2. Chuyển tiền");
                 Console.WriteLine("3. Xem lịch sử giao dịch");
-                Console.WriteLine("4. Xem số dư tài khoản"); // Thêm tùy chọn xem số dư
+                Console.WriteLine("4. Xem số dư tài khoản");
                 string choice = Console.ReadLine();
 
                 switch (choice)
@@ -210,7 +210,7 @@ namespace ATMManagement
                         break;
                 }
 
-                // Hiển thị lựa chọn sau khi thực hiện xong giao dịch
+
                 Console.WriteLine("Bạn có muốn tiếp tục giao dịch không? (y/n)");
                 userChoice = Console.ReadLine().ToLower();
             }
@@ -219,7 +219,7 @@ namespace ATMManagement
             Console.WriteLine("Cảm ơn bạn đã sử dụng dịch vụ!");
         }
 
-        // Phương thức tìm tài khoản theo tên
+
         static Account FindAccountByName(string name, Account account1, Account account2)
         {
             if (account1.AccountHolderName == name)
